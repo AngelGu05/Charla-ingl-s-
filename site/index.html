@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>John the Apostle: The Beloved Disciple</title>
+<style>
+  :root { --bg:#f7f4ee; --fg:#1d1b18; --muted:#6b645a; --accent:#7a4a1e; --card:#fffdf8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#171513; --fg:#ece7de; --muted:#a39b8f; --accent:#e0a866; --card:#221f1b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family: Georgia, "Times New Roman", serif; line-height:1.55; }
+  main { max-width:760px; margin:0 auto; padding:24px 16px 96px; }
+  header h1 { font-size:1.9rem; margin:.2em 0 .1em; }
+  header p { color:var(--muted); margin:0; }
+  .progress { height:4px; background:var(--card); border-radius:2px; margin:16px 0 8px; overflow:hidden; }
+  .progress span { display:block; height:100%; width:0; background:var(--accent); transition:width .3s; }
+  .counter { color:var(--muted); font-size:.9rem; font-family: system-ui, sans-serif; }
+  .slide { display:none; background:var(--card); border-radius:14px; padding:24px 20px; margin-top:12px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .slide.active { display:block; }
+  .slide h2 { margin:0 0 12px; color:var(--accent); font-size:1.45rem; }
+  .slide h3 { font-family: system-ui, sans-serif; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:18px 0 6px; }
+  .slide ul { padding-left:1.1rem; margin:0; }
+  .slide li { margin:.3em 0; }
+  .script { border-left:3px solid var(--accent); padding-left:14px; margin-top:8px; }
+  .nav { position:fixed; left:0; right:0; bottom:0; display:flex; gap:12px; justify-content:space-between; padding:12px 16px; background:var(--bg); border-top:1px solid var(--card); }
+  .nav button { flex:1; max-width:240px; padding:12px; font-size:1rem; border:0; border-radius:10px; background:var(--accent); color:#fff; cursor:pointer; }
+  .nav button:disabled { opacity:.35; cursor:default; }
+  .notes { color:var(--muted); font-size:.9rem; margin-top:32px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>John the Apostle: The Beloved Disciple</h1>
+    <p>A 5-minute talk</p>
+  </header>
+  <div class="progress"><span id="bar"></span></div>
+  <div class="counter" id="counter"></div>
+
+  <section class="slide">
+    <h2>Title</h2>
+    <p class="script">Good morning, everyone. Today I want to talk about a man who was a fisherman, a "son of thunder," a close friend of Jesus, and, according to tradition, the only one of the twelve apostles who died of old age. His name is John.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Who was John?</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Galilean fisherman</li>
+      <li>Son of Zebedee, brother of James</li>
+      <li>Called by Jesus (Mark 1:19-20)</li>
+      <li>Nicknamed "Sons of Thunder" (Mark 3:17)</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">John was from Galilee. He worked with his father Zebedee and his brother James on the Sea of Galilee. One day Jesus called them while they were mending their nets, and they left everything to follow him. Jesus gave John and James the nickname "Sons of Thunder." They had fiery tempers. In Luke 9, they even asked Jesus to call down fire from heaven on a Samaritan village that refused to welcome him. But Jesus was patient, and over time he changed them.</p>
+  </section>
+
+  <section class="slide">
+    <h2>The Inner Circle</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Part of the inner three: Peter, James and John</li>
+      <li>Present at the Transfiguration and in Gethsemane</li>
+      <li>"The disciple whom Jesus loved" (John 13:23)</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">John was part of Jesus' inner circle, together with Peter and James. He was present at the Transfiguration, when Jesus' face shone like the sun, and he was with Jesus in the garden of Gethsemane. At the Last Supper, John leaned on Jesus' chest. In his Gospel, he calls himself "the disciple whom Jesus loved." He does not say this out of pride. He says it out of gratitude, because he never forgot how much he had been loved.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Faithful at the Cross</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Almost all the disciples fled</li>
+      <li>John stayed at the foot of the cross (John 19:25-27)</li>
+      <li>Jesus entrusted his mother Mary to John's care</li>
+      <li>At the empty tomb: "he saw and believed" (John 20:8)</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">When Jesus was crucified, almost all of his disciples ran away. John stayed. From the cross, Jesus looked at his mother Mary and said to John, "Behold your mother." From that hour, John took her into his home. On the morning of the resurrection, John ran to the empty tomb with Peter. He arrived first, looked inside, and believed.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Why John Matters</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Wrote the Gospel of John, 1, 2 and 3 John, and (traditionally) Revelation</li>
+      <li>"In the beginning was the Word" (John 1:1)</li>
+      <li>"For God so loved the world" (John 3:16)</li>
+      <li>"God is love" (1 John 4:8)</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">John wrote the Gospel that bears his name, three letters, and, according to most of the early church, the book of Revelation. His Gospel is different from the other three. It has deep, reflective language. It begins with "In the beginning was the Word," and it contains some of the most famous verses in the Bible, like "For God so loved the world." Because of his focus on love, he is often called the apostle of love. He wrote, "God is love," and "Little children, let us love one another."</p>
+  </section>
+
+  <section class="slide">
+    <h2>Escaping Death</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Tradition (Tertullian, around AD 200): boiled in oil in Rome, and came out unharmed</li>
+      <li>Exiled to the island of Patmos (Revelation 1:9)</li>
+      <li>God protected him until his work was finished</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">Now, let's talk about the time his enemies tried to kill him. Scripture does not describe this event, but an early church writer named Tertullian, around the year 200, reports that the Roman emperor Domitian had John thrown into a large pot of boiling oil in Rome. Tradition says John came out without a single burn. The emperor then sent him into exile on the island of Patmos. John himself writes that he was on Patmos "because of the word of God and the testimony of Jesus" (Revelation 1:9). There, he received the visions that became the book of Revelation. A later legend, from a non-biblical text called the <em>Acts of John</em>, also tells of a poisoned cup that John blessed and drank without harm. We do not need the legends to see the principle: God protected his witness until his work was complete.</p>
+  </section>
+
+  <section class="slide">
+    <h2>A Long Life and a Peaceful Death</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Returned to Ephesus and led the churches of Asia Minor</li>
+      <li>Died there around AD 100, very old</li>
+      <li>The other apostles were killed for their faith (James: Acts 12:2)</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">After his exile, John returned to Ephesus, in modern-day Turkey, and cared for the churches in that region. He died there around the year 100, very old. Tradition says he is the only one of the twelve apostles who died of natural causes. The others, according to Scripture and tradition, were killed for their faith. His brother James was executed by King Herod around the year 44. Peter and others were martyred as well. John's long life was a gift, and he used it to keep telling people about love.</p>
+  </section>
+
+  <section class="slide">
+    <h2>What Can We Learn?</h2>
+    <h3>On screen</h3>
+    <ul>
+      <li>Jesus can change a person's heart: from "fire from heaven" to "love one another"</li>
+      <li>God protects his people until his purpose is complete</li>
+      <li>Faithfulness matters, especially when others run away</li>
+    </ul>
+    <h3>Script</h3>
+    <p class="script">John started out as a young man who wanted fire to fall on his enemies. He ended as an old man who wrote, "Little children, let us love one another." Jesus can change a heart like that, and he can change ours too. John stayed at the cross when others ran. He trusted God through exile and danger. Even if our lives are not as dramatic, we can be faithful where we are, and we can trust that God is still protecting his work. Thank you. Now I'm happy to answer your questions.</p>
+  </section>
+
+  <p class="notes"><strong>Speaker note:</strong> Scripture records John's calling, his place at the cross, his writings and his exile on Patmos. The boiling oil, the poisoned cup and the "only apostle who died of old age" claim come from early church tradition and later legends. Say so if asked.</p>
+</main>
+
+<nav class="nav">
+  <button id="prev">← Previous</button>
+  <button id="next">Next →</button>
+</nav>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    document.getElementById('counter').textContent = `Slide ${i + 1} of ${slides.length}`;
+    document.getElementById('bar').style.width = `${((i + 1) / slides.length) * 100}%`;
+    document.getElementById('prev').disabled = i === 0;
+    document.getElementById('next').disabled = i === slides.length - 1;
+    try { localStorage.setItem('johnSlide', i); } catch (e) {}
+  }
+  document.getElementById('prev').onclick = () => show(i - 1);
+  document.getElementById('next').onclick = () => show(i + 1);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') show(i + 1);
+    if (e.key === 'ArrowLeft') show(i - 1);
+  });
+  let start = 0;
+  try { start = parseInt(localStorage.getItem('johnSlide'), 10) || 0; } catch (e) {}
+  show(start);
+</script>
+</body>
+</html>
