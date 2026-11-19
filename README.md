@@ -1,6 +1,9 @@
-# John the Apostle: The Beloved Disciple
+# John, the Beloved Disciple
 
-A 5-minute English presentation about John the apostle.
+A 12-slide talk in English about John, the disciple whom Jesus loved.
 
-- `index.html`: the slide presentation (single file, no build step). Open it in a browser. Use the arrow keys or swipe to move, and press **N** to show the speaker script.
-- `juan-apostol-presentation.md`: the full script and slide outline.
+Open `index.html` in a browser (or the Vercel deployment).
+
+**Controls:** arrow keys / space / click the right or left side of the screen / swipe on mobile. Press `F` for fullscreen. Each slide has a URL like `#5`.
+
+Speaker notes for every slide are inside the `<aside class="notes">` of each section in `index.html`.

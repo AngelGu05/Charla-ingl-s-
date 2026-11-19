@@ -3,500 +3,398 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>John the Apostle: The Beloved Disciple</title>
+<title>John, the Beloved Disciple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
 <style>
-  :root {
-    --bg1: #0f1a33; --bg2: #2a3d6e;
-    --fg: #fbf7ef; --muted: #c9d3e8;
-    --accent: #f5be6b; --accent2: #7fd1c7; --panel: rgba(255,255,255,.08);
-  }
-  * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  body {
-    font-family: Georgia, "Times New Roman", serif; color: var(--fg);
-    background:
-      radial-gradient(circle at 85% 8%, rgba(245,190,107,.18), transparent 35%),
-      radial-gradient(circle at 10% 100%, rgba(127,209,199,.12), transparent 40%),
-      linear-gradient(160deg, var(--bg2), var(--bg1) 75%);
-    overflow: hidden;
-  }
-  .deck { position: fixed; inset: 0; }
-  .slide {
-    position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
-    padding: 6vh 7vw 16vh; animation: fade .45s ease;
-  }
-  .slide::before {
-    content: ""; position: absolute; left: 7vw; top: 7vh; width: 64px; height: 4px;
-    background: var(--accent); border-radius: 2px;
-  }
-  .slide.title::before { display: none; }
-  .slide.active { display: flex; }
-  @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+:root {
+  --night: #17120E;
+  --night2: #221912;
+  --parchment: #F5EEE1;
+  --parchment2: #EBE1CE;
+  --gold: #C9A24A;
+  --gold-deep: #7A5A16;
+  --wine: #6B2323;
+  --ink: #2A2019;
+  --soft-dark: #5A4B3D;
+  --soft-light: #CDBFA8;
+}
 
-  .wrap { width: min(1150px, 100%); display: grid; grid-template-columns: 1.15fr .85fr; gap: 4vw; align-items: center; }
-  .wrap.solo { grid-template-columns: 1fr; text-align: center; }
-  .art { width: 100%; position: relative; }
-  .art img { width: 100%; max-height: 62vh; object-fit: cover; border-radius: 22px; box-shadow: 0 18px 50px rgba(0,0,0,.35); display: block; }
-  .art svg { width: 100%; height: auto; max-height: 62vh; display: block; border-radius: 22px; box-shadow: 0 18px 50px rgba(0,0,0,.35); }
-  .slide.title .art svg, .slide.title .art img { box-shadow: 0 0 80px rgba(245,190,107,.25), 0 18px 50px rgba(0,0,0,.35); }
+body { font-family: 'Nunito Sans', Arial, sans-serif; font-size: 32px; color: #2A2019; }
 
-  .kicker { font-family: system-ui, sans-serif; font-size: clamp(.8rem, 1.5vw, 1rem); text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin: 0 0 1.2vh; }
-  h1 { font-size: clamp(2.3rem, 6vw, 4.8rem); line-height: 1.05; margin: 0 0 2.5vh; }
-  h2 { font-size: clamp(1.9rem, 4.2vw, 3.2rem); line-height: 1.1; margin: 0 0 2.5vh; color: var(--accent); }
-  ul { font-size: clamp(1rem, 1.9vw, 1.5rem); line-height: 1.45; padding-left: 1.1em; margin: 0; }
-  li { margin: .45em 0; }
-  li::marker { color: var(--accent); }
-  .ref { color: var(--accent2); font-size: .85em; font-family: system-ui, sans-serif; white-space: nowrap; }
-  .quote { font-size: clamp(1.3rem, 3vw, 2.2rem); font-style: italic; line-height: 1.4; border-left: 6px solid var(--accent); padding-left: .6em; margin: 0; text-align: left; }
-  .quote small { display: block; font-family: system-ui, sans-serif; font-style: normal; font-size: .6em; color: var(--accent2); margin-top: .6em; }
-  .sub { font-family: system-ui, sans-serif; color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.2rem); margin-top: 3vh; }
-  .timeline { display: grid; gap: 12px; margin-top: 2vh; font-family: system-ui, sans-serif; width: 100%; text-align: left; }
-  .tl { display: grid; grid-template-columns: 130px 1fr; gap: 16px; align-items: baseline; background: var(--panel); padding: 12px 18px; border-radius: 12px; }
-  .tl b { color: var(--accent); font-family: Georgia, serif; font-size: 1.15rem; }
-  .tl span { font-size: clamp(.95rem, 1.7vw, 1.1rem); }
+section { padding: 128px; box-sizing: border-box; }
+section.dark { background: #17120E; color: #F5EEE1; }
+section.night2 { background: #221912; color: #F5EEE1; }
+section.light { background: #F5EEE1; color: #2A2019; }
+section.light2 { background: #EBE1CE; color: #2A2019; }
+section.wine { background: #6B2323; color: #F5EEE1; }
 
-  /* Controls */
-  .bar {
-    position: fixed; left: 0; right: 0; bottom: 0; height: 12vh; min-height: 66px;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 0 4vw; background: rgba(10,15,30,.45); backdrop-filter: blur(6px);
-    font-family: system-ui, sans-serif;
-  }
-  .bar button { background: var(--panel); color: var(--fg); border: 1px solid rgba(255,255,255,.22); border-radius: 10px; padding: 10px 16px; font-size: 1rem; cursor: pointer; }
-  .bar button:disabled { opacity: .3; cursor: default; }
-  .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .dots button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 0; background: rgba(255,255,255,.3); cursor: pointer; }
-  .dots button.on { background: var(--accent); }
+h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; margin: 0; }
+h1 { font-size: 120px; font-weight: 600; line-height: 1.0; }
+h2 { font-size: 72px; font-weight: 600; line-height: 1.08; }
+h3 { font-size: 44px; font-weight: 700; line-height: 1.15; }
+p { margin: 0; font-size: 32px; line-height: 1.4; }
 
-  .notes {
-    position: fixed; right: 0; top: 0; bottom: 12vh; width: min(440px, 90vw);
-    background: rgba(5,8,18,.85); backdrop-filter: blur(8px); padding: 24px; overflow-y: auto;
-    transform: translateX(105%); transition: transform .3s;
-    font-family: system-ui, sans-serif; font-size: 1.02rem; line-height: 1.6;
-  }
-  .notes.open { transform: none; }
-  .notes h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin: 0 0 12px; }
-  .notes p { margin: 0 0 1em; }
+.eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 6px; color: #C9A24A; margin-bottom: 28px; }
+.light .eyebrow, .light2 .eyebrow { color: #7A5A16; }
+.soft { color: #CDBFA8; }
+.light .soft, .light2 .soft { color: #5A4B3D; }
+.wine .soft { color: #E8D9C2; }
+.gold { color: #C9A24A; }
+.quote { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: 44px; line-height: 1.3; }
+.ref { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: #C9A24A; margin-top: 16px; }
+.light .ref, .light2 .ref { color: #7A5A16; }
+.footnote { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; color: #CDBFA8; }
+.light .footnote, .light2 .footnote { color: #5A4B3D; }
 
-  @media (max-width: 760px) {
-    .wrap { grid-template-columns: 1fr; gap: 2vh; }
-    .art { order: -1; }
-    .art img, .art svg { max-height: 26vh; }
-    .slide { padding: 5vh 6vw 16vh; align-items: flex-start; overflow-y: auto; }
-    .slide::before { top: 2.5vh; }
-    .tl { grid-template-columns: 1fr; gap: 4px; }
-    .bar button { padding: 10px 12px; }
-    #fs { display: none; }
-  }
+/* motion */
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0px); } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes settle { from { opacity: 0; transform: scale(1.06); } to { opacity: 1; transform: scale(1); } }
+.rise { animation: rise 650ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.fade { animation: fadein 900ms ease both; }
+.settle { animation: settle 1000ms ease-out both; }
+.d1 { animation-delay: 100ms; }
+.d2 { animation-delay: 200ms; }
+.d3 { animation-delay: 300ms; }
+.d4 { animation-delay: 400ms; }
+.d5 { animation-delay: 500ms; }
+
+/* cover */
+.cover-img { position: absolute; left: 860px; top: 0px; width: 1060px; height: 1080px; object-fit: cover; }
+.cover-fade { position: absolute; left: 860px; top: 0px; width: 520px; height: 1080px; background: linear-gradient(90deg, #17120E 0%, rgba(23, 18, 14, 0) 100%); }
+.cover-text { width: 860px; height: 824px; display: flex; flex-direction: column; justify-content: center; }
+.cover-cross { width: 88px; height: 89px; margin-bottom: 40px; }
+.cover-rule { width: 120px; height: 3px; background: #C9A24A; margin-top: 44px; margin-bottom: 36px; }
+.cover-lede { color: #CDBFA8; }
+
+/* full-bleed photo slides */
+.bleed { position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; object-fit: cover; }
+.shade-bottom { position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; background: linear-gradient(0deg, rgba(23, 18, 14, 0.97) 0%, rgba(23, 18, 14, 0.88) 40%, rgba(23, 18, 14, 0.05) 78%); }
+.shade-all { position: absolute; left: 0px; top: 0px; width: 1920px; height: 1080px; background: rgba(23, 18, 14, 0.78); }
+.bottom-stack { width: 1400px; height: 824px; display: flex; flex-direction: column; justify-content: flex-end; }
+.bottom-stack .quote { margin-top: 32px; }
+.center-stack { height: 824px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+
+/* who */
+.split { display: flex; gap: 80px; height: 824px; }
+.split-main { flex: 1; display: flex; flex-direction: column; }
+.portrait { width: 520px; height: 824px; object-fit: cover; border-radius: 12px; box-shadow: 0px 24px 64px rgba(42, 32, 25, 0.28); }
+.facts { display: flex; flex-direction: column; margin-top: 40px; border-top: 2px solid #D6C6A6; }
+.fact { display: flex; gap: 40px; padding: 18px 0px; border-bottom: 2px solid #D6C6A6; }
+.fact-k { width: 220px; flex: none; font-size: 24px; font-weight: 700; letter-spacing: 4px; color: #7A5A16; padding-top: 6px; }
+.fact-v { flex: 1; font-size: 32px; line-height: 1.35; }
+
+/* named */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 64px; }
+.card-light { background: #F5EEE1; border-radius: 16px; padding: 40px 48px; border-left: 6px solid #C9A24A; }
+.card-label { font-size: 24px; font-weight: 700; letter-spacing: 4px; color: #7A5A16; margin-bottom: 12px; }
+.refs { font-size: 24px; letter-spacing: 2px; color: #5A4B3D; margin-top: 20px; }
+
+/* thunder */
+.contrast { display: flex; align-items: center; gap: 40px; margin-top: 64px; }
+.card-dark { flex: 1; background: #261C14; border: 2px solid #5E4A26; border-radius: 16px; padding: 40px 48px; }
+.card-dark .card-label { color: #C9A24A; }
+.card-glow { flex: 1; background: #2E2214; border: 2px solid #C9A24A; border-radius: 16px; padding: 40px 48px; box-shadow: 0px 0px 48px rgba(201, 162, 74, 0.25); }
+.card-glow .card-label { color: #C9A24A; }
+.arrow { width: 96px; height: 48px; background: #C9A24A; flex: none; }
+.closing-line { margin-top: 56px; }
+
+/* cross */
+.side-img { position: absolute; left: 0px; top: 0px; width: 700px; height: 1080px; object-fit: cover; }
+.right-col { margin-left: 620px; height: 824px; display: flex; flex-direction: column; justify-content: center; }
+.right-col .quote { margin-top: 40px; }
+.right-col .lead { margin-top: 40px; }
+
+/* mirror */
+.mirror-cross { position: absolute; left: 1240px; top: 200px; width: 560px; height: 566px; opacity: 0.22; }
+.mirror-text { width: 1120px; height: 824px; display: flex; flex-direction: column; justify-content: center; }
+.mirror-text .lead { margin-top: 48px; }
+
+/* attempts */
+.attempt-row { display: flex; gap: 80px; align-items: center; margin-top: 48px; }
+.medallion { width: 380px; height: 380px; object-fit: cover; border-radius: 190px; border: 6px solid #C9A24A; box-shadow: 0px 0px 64px rgba(201, 162, 74, 0.35); flex: none; }
+.attempt-cards { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+.attempt { background: #2B2017; border-left: 6px solid #C9A24A; border-radius: 12px; padding: 28px 40px; }
+.attempt-num { font-size: 24px; font-weight: 700; letter-spacing: 4px; color: #C9A24A; margin-bottom: 4px; }
+.attempt-body { font-size: 32px; line-height: 1.4; color: #CDBFA8; margin-top: 8px; }
+section.withfoot { padding: 128px 128px 160px; }
+
+/* patmos */
+.steps { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 48px; margin-top: 72px; }
+.step { border-top: 4px solid #C9A24A; padding-top: 28px; }
+.step-num { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 72px; font-weight: 600; line-height: 1.0; color: #7A5A16; font-variant-numeric: lining-nums; }
+.step-where { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: #7A5A16; margin-top: 16px; margin-bottom: 8px; }
+.step-body { font-size: 32px; line-height: 1.35; color: #5A4B3D; margin-top: 12px; }
+
+/* old age */
+.age { display: flex; gap: 80px; height: 824px; align-items: center; }
+.age-left { width: 460px; flex: none; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.big-one { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 400px; font-weight: 600; line-height: 1.0; color: #C9A24A; font-variant-numeric: lining-nums; }
+.age-right { flex: 1; display: flex; flex-direction: column; }
+.fates { font-size: 32px; color: #F5EEE1; margin-top: 36px; }
+.fates th { text-align: left; color: #C9A24A; }
+.row-john { background: #4A3818; }
+.age-quote { font-style: italic; font-size: 32px; line-height: 1.4; color: #CDBFA8; margin-top: 36px; }
+
+/* reflection */
+.take { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 48px; }
+.take-card { background: #F5EEE1; border-radius: 16px; padding: 32px 40px; border-top: 6px solid #C9A24A; }
+.take-body { font-size: 32px; line-height: 1.35; color: #5A4B3D; margin-top: 10px; }
+.jerome { margin-top: 28px; }
+
+/* closing */
+.closing-cross { width: 72px; height: 73px; margin-bottom: 40px; }
+.closing-q { width: 1440px; }
+.thanks { font-size: 24px; font-weight: 700; letter-spacing: 8px; color: #C9A24A; margin-top: 56px; }
+
+
+html, body { margin: 0; height: 100%; background: #0d0a08; overflow: hidden; }
+#stage { position: fixed; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 0 0; }
+#stage > section { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: none; overflow: hidden; }
+#stage > section.active { display: block; }
+#stage > section .split, #stage > section .age { display: flex; }
+aside.notes { display: none; }
+x-shape { display: block; }
+x-shape[kind="arrow-right"] { clip-path: polygon(0 30%, 60% 30%, 60% 0, 100% 50%, 60% 100%, 60% 70%, 0 70%); }
+.fates { border-collapse: collapse; }
+.fates th, .fates td { padding: 0.35em 0.6em; border-bottom: 1px solid rgba(201,162,74,0.25); text-align: left; }
+#hud { position: fixed; right: 18px; bottom: 14px; font: 600 14px 'Nunito Sans', Arial, sans-serif; color: rgba(245,238,225,.55); letter-spacing: 2px; z-index: 10; user-select: none; }
+#bar { position: fixed; left: 0; bottom: 0; height: 3px; background: #C9A24A; z-index: 10; transition: width .4s ease; }
+.nav { position: fixed; top: 0; bottom: 0; width: 30%; z-index: 5; cursor: pointer; }
+#prev { left: 0; } #next { right: 0; }
+
 </style>
 </head>
 <body>
-<div class="deck" id="deck">
-
-  <!-- 1. Title -->
-  <section class="slide title">
-    <div class="wrap">
-      <div>
-        <p class="kicker">A 5-minute talk</p>
-        <h1>John the Apostle: The Beloved Disciple</h1>
-        <p class="sub">Fisherman · Witness of the cross · Exile on Patmos · Apostle of love</p>
-      </div>
-      <div class="art">
-        <img src="juan.jpg" alt="Saint John the Apostle" onload="this.nextElementSibling.style.display='none'" onerror="this.remove()">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3f6b"/><stop offset="1" stop-color="#14213d"/></linearGradient></defs>
-          <rect width="400" height="300" fill="url(#sea)"/>
-          <circle cx="300" cy="90" r="42" fill="#f5be6b" opacity=".9"/>
-          <path d="M0 200 Q50 185 100 200 T200 200 T300 200 T400 200 V300 H0Z" fill="#2f5d8a" opacity=".8"/>
-          <path d="M0 230 Q50 215 100 230 T200 230 T300 230 T400 230 V300 H0Z" fill="#26507a"/>
-          <path d="M120 170 H250 L230 195 H140Z" fill="#7a4a1e"/>
-          <path d="M185 170 V100 L240 165Z" fill="#fbf7ef"/>
-          <path d="M180 170 V120 L140 165Z" fill="#fbf7ef" opacity=".85"/>
-          <path d="M120 170 Q185 185 250 170" stroke="#f5be6b" stroke-width="3" fill="none"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. Who was John -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>Who was John?</h2>
-        <ul>
-          <li>A fisherman on the Sea of Galilee, working in his father Zebedee's family business with hired workers <span class="ref">Mark 1:20</span></li>
-          <li>Partner with Simon Peter in the fishing trade <span class="ref">Luke 5:10</span></li>
-          <li>Called by Jesus while mending nets, and he left the boat and his father to follow him</li>
-          <li>Jesus named him and James "Sons of Thunder" <span class="ref">Mark 3:17</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <img src="juan.jpg" alt="Saint John the Apostle" onload="this.nextElementSibling.style.display='none'" onerror="this.remove()">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <g stroke="#7fd1c7" stroke-width="2" fill="none" opacity=".9">
-            <path d="M60 60 L200 40 L330 70 L300 200 L160 240 L70 170 Z"/>
-            <path d="M60 60 L300 200 M200 40 L160 240 M330 70 L70 170 M130 52 L110 200 M265 55 L240 230"/>
-            <path d="M130 140 L270 130 M100 110 L300 120 M150 200 L280 175"/>
-          </g>
-          <ellipse cx="230" cy="180" rx="34" ry="18" fill="#f5be6b"/>
-          <path d="M262 180 L290 165 L290 195Z" fill="#f5be6b"/>
-          <circle cx="218" cy="176" r="3" fill="#14213d"/>
-          <rect x="40" y="250" width="320" height="10" rx="5" fill="#7a4a1e"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. Inner circle -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>The Inner Circle</h2>
-        <ul>
-          <li>Among the three closest to Jesus, with Peter and James <span class="ref">Mark 5:37</span></li>
-          <li>Present at the Transfiguration, when Jesus' face shone like the sun <span class="ref">Matthew 17:1-2</span></li>
-          <li>Asked Jesus to pray with them in Gethsemane <span class="ref">Mark 14:33</span></li>
-          <li>Leaned on Jesus' chest at the Last Supper and asked who would betray him <span class="ref">John 13:23-25</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <circle cx="200" cy="80" r="26" fill="#f5be6b"/>
-          <path d="M170 150 Q200 110 230 150 V220 H170Z" fill="#f5be6b"/>
-          <circle cx="110" cy="110" r="22" fill="#7fd1c7"/>
-          <path d="M84 170 Q110 136 136 170 V230 H84Z" fill="#7fd1c7"/>
-          <circle cx="290" cy="110" r="22" fill="#fbf7ef"/>
-          <path d="M264 170 Q290 136 316 170 V230 H264Z" fill="#fbf7ef"/>
-          <circle cx="200" cy="80" r="60" fill="none" stroke="#f5be6b" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 6"/>
-          <text x="200" y="265" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="16">Peter · John · James</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. At the cross -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>Faithful at the Cross</h2>
-        <ul>
-          <li>Most disciples fled when Jesus was arrested <span class="ref">Mark 14:50</span></li>
-          <li>John stood near the cross with Mary and other women <span class="ref">John 19:25</span></li>
-          <li>Jesus gave his mother into John's care: "Behold your mother" <span class="ref">John 19:26-27</span></li>
-          <li>John claims to be an eyewitness: "he knows that he tells the truth" <span class="ref">John 19:35</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3f6b"/><stop offset="1" stop-color="#f5be6b" stop-opacity=".5"/></linearGradient></defs>
-          <rect width="400" height="300" fill="url(#sky)"/>
-          <path d="M0 260 Q200 210 400 260 V300 H0Z" fill="#14213d"/>
-          <rect x="190" y="70" width="20" height="170" fill="#fbf7ef"/>
-          <rect x="140" y="110" width="120" height="18" fill="#fbf7ef"/>
-          <path d="M120 245 Q200 225 280 245" stroke="#7fd1c7" stroke-width="4" fill="none" opacity=".7"/>
-          <text x="200" y="282" text-anchor="middle" fill="#fbf7ef" font-family="system-ui" font-size="15">"Behold your mother."</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Resurrection and restoration -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>The Empty Tomb</h2>
-        <ul>
-          <li>Mary Magdalene reports the tomb is empty <span class="ref">John 20:1-2</span></li>
-          <li>John outruns Peter and arrives first, but waits outside <span class="ref">John 20:4-5</span></li>
-          <li>Peter goes in first; then John goes in and "saw and believed" <span class="ref">John 20:8</span></li>
-          <li>Later, by the lake, John is the first to say, "It is the Lord!" <span class="ref">John 21:7</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <path d="M120 260 V140 Q120 70 200 70 Q280 70 280 140 V260Z" fill="#2d3f6b"/>
-          <path d="M160 260 V160 Q160 130 200 130 Q240 130 240 160 V260Z" fill="#14213d"/>
-          <circle cx="200" cy="105" r="10" fill="#f5be6b"/>
-          <path d="M40 250 L70 240 M330 240 L360 250" stroke="#7fd1c7" stroke-width="3" stroke-linecap="round"/>
-          <text x="200" y="290" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="15">Saw and believed · John 20:8</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Early church -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>Leader in the Early Church</h2>
-        <ul>
-          <li>Healed a lame man with Peter at the Temple gate <span class="ref">Acts 3:1-8</span></li>
-          <li>Arrested and questioned by the council, then said: "We cannot stop speaking" <span class="ref">Acts 4:19-20</span></li>
-          <li>Sent with Peter to Samaria so the believers there received the Holy Spirit <span class="ref">Acts 8:14</span></li>
-          <li>Paul names him among the "pillars" of the church <span class="ref">Galatians 2:9</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <rect x="40" y="200" width="320" height="12" fill="#7a4a1e"/>
-          <rect x="60" y="120" width="18" height="80" fill="#fbf7ef"/>
-          <rect x="120" y="120" width="18" height="80" fill="#fbf7ef"/>
-          <rect x="260" y="120" width="18" height="80" fill="#fbf7ef"/>
-          <rect x="320" y="120" width="18" height="80" fill="#fbf7ef"/>
-          <path d="M40 120 H340 L300 85 H80Z" fill="#fbf7ef"/>
-          <circle cx="200" cy="165" r="12" fill="#f5be6b"/>
-          <path d="M190 180 V230 M180 200 L220 200 M182 230 L190 215 M218 230 L210 215" stroke="#f5be6b" stroke-width="4"/>
-          <text x="200" y="270" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="14">Temple gate · Acts 3</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Writings -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>His Writings</h2>
-        <ul>
-          <li><b>Gospel of John:</b> written to show "that you may believe" <span class="ref">John 20:31</span></li>
-          <li>Seven "signs" (miracles) and seven "I am" statements, such as "I am the way" <span class="ref">John 14:6</span></li>
-          <li><b>1, 2, 3 John:</b> letters about love, truth and hospitality</li>
-          <li><b>Revelation (traditional):</b> letters to seven churches in Asia, including Ephesus <span class="ref">Revelation 2:1-7</span></li>
-        </ul>
-      </div>
-      <div>
-        <p class="quote">"In the beginning was the Word, and the Word was with God."<small>John 1:1</small></p>
-        <p class="quote" style="margin-top:4vh">"God is love."<small>1 John 4:8</small></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Patmos -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>Exile on Patmos</h2>
-        <ul>
-          <li>"I, John... was on the island called Patmos because of the word of God and the testimony of Jesus" <span class="ref">Revelation 1:9</span></li>
-          <li>A small rocky island in the Aegean Sea, used by Rome as a place of banishment (tradition)</li>
-          <li>On "the Lord's day" he hears a voice and sees the risen Christ among the lampstands <span class="ref">Revelation 1:10-13</span></li>
-          <li>Christ says, "Do not be afraid... I am the First and the Last" <span class="ref">Revelation 1:17</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <circle cx="330" cy="60" r="28" fill="#f5be6b" opacity=".85"/>
-          <path d="M20 250 Q120 200 200 230 T380 240 V300 H20Z" fill="#26507a"/>
-          <path d="M120 230 Q200 180 280 230" fill="#7a4a1e"/>
-          <path d="M160 200 L200 150 L240 200Z" fill="#7fd1c7" opacity=".6"/>
-          <text x="200" y="285" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="15">Patmos · Revelation 1:9</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9. Escaping death -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>Protected by God</h2>
-        <ul>
-          <li><b>Boiling oil in Rome:</b> Tertullian (c. AD 200) says Domitian had John plunged into oil and he came out unharmed</li>
-          <li>Jerome (c. AD 400) repeats the story, placing it at the Latin Gate</li>
-          <li><b>Poisoned cup:</b> a later legend in the <em>Acts of John</em> (not Scripture)</li>
-          <li>Scripture does not record these events. The point: God kept him until his work was done</li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <path d="M110 150 H290 Q290 230 200 240 Q110 230 110 150Z" fill="#3b3b4f"/>
-          <ellipse cx="200" cy="150" rx="90" ry="14" fill="#7a4a1e"/>
-          <path d="M150 140 Q170 125 190 140 T230 140 T270 140" stroke="#f5be6b" stroke-width="5" fill="none"/>
-          <path d="M165 110 Q170 95 165 80 M200 105 Q205 90 200 75 M235 110 Q240 95 235 80" stroke="#f5be6b" stroke-width="3" fill="none" opacity=".7"/>
-          <path d="M40 270 Q120 250 200 262 T360 268 V300 H40Z" fill="#26507a"/>
-          <text x="200" y="292" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="13">Tradition, not Scripture</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. Ephesus and death -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>Ephesus and a Peaceful Death</h2>
-        <ul>
-          <li>Returned to Ephesus, a major city in what is now western Turkey</li>
-          <li>Irenaeus (c. AD 180) says John stayed in Ephesus until the time of Emperor Trajan</li>
-          <li>Died there around AD 100, very old, the last of the twelve apostles</li>
-          <li>Tradition: the only apostle who died of natural causes. His brother James was killed by Herod in AD 44 <span class="ref">Acts 12:2</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <g fill="#fbf7ef" opacity=".9">
-            <rect x="60" y="110" width="22" height="130"/>
-            <rect x="110" y="110" width="22" height="130"/>
-            <rect x="260" y="110" width="22" height="130"/>
-            <rect x="310" y="110" width="22" height="130"/>
-          </g>
-          <path d="M45 105 H330 L300 80 H75Z" fill="#fbf7ef"/>
-          <path d="M40 245 H340 V258 H40Z" fill="#7a4a1e"/>
-          <text x="200" y="70" text-anchor="middle" fill="#f5be6b" font-family="system-ui" font-size="18">Ephesus</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11. Timeline -->
-  <section class="slide">
-    <div class="wrap solo">
-      <div>
-        <h2>John's Life at a Glance</h2>
-        <div class="timeline">
-          <div class="tl"><b>c. AD 28</b><span>Called by Jesus on the Sea of Galilee</span></div>
-          <div class="tl"><b>AD 30-33</b><span>Witness of the cross, resurrection and Pentecost</span></div>
-          <div class="tl"><b>AD 44</b><span>James is executed by Herod Agrippa I</span></div>
-          <div class="tl"><b>c. AD 60-90</b><span>Ministry in Ephesus; writes his Gospel and letters</span></div>
-          <div class="tl"><b>c. AD 95</b><span>Exiled to Patmos, where he receives the visions of Revelation</span></div>
-          <div class="tl"><b>c. AD 100</b><span>Dies in Ephesus, very old</span></div>
-        </div>
-        <p class="sub">Dates are approximate, based on Scripture and early church tradition.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12. Lessons -->
-  <section class="slide">
-    <div class="wrap">
-      <div>
-        <h2>What Can We Learn?</h2>
-        <ul>
-          <li>Jesus can change a heart: from "fire from heaven" to "love one another"</li>
-          <li>Faithfulness matters, especially when others run away</li>
-          <li>God's protection does not always mean an easy life, but he is present in exile</li>
-          <li>Love is the mark of a disciple <span class="ref">John 13:35</span></li>
-        </ul>
-      </div>
-      <div class="art">
-        <svg viewBox="0 0 400 300" aria-hidden="true">
-          <rect width="400" height="300" fill="#1f3358"/>
-          <path d="M200 240 C120 180 90 130 120 100 C145 75 185 90 200 120 C215 90 255 75 280 100 C310 130 280 180 200 240Z" fill="#f5be6b"/>
-          <path d="M200 120 C185 90 145 75 120 100" stroke="#7a4a1e" stroke-width="3" fill="none" opacity=".5"/>
-          <text x="200" y="278" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="15">"God is love" · 1 John 4:8</text>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- 13. Closing -->
-  <section class="slide">
-    <div class="wrap solo">
-      <div>
-        <p class="kicker">Thank you</p>
-        <p class="quote" style="text-align:center; border:0; padding:0; margin:0 auto; max-width:24ch;">"Little children, let us love one another."<small>1 John 3:18 · Questions?</small></p>
-      </div>
-    </div>
-  </section>
-
+<div id="stage">
+<section id="cover" class="dark" data-transition="fade">
+<img class="cover-img settle" src="assets/spirit-window.jpg" alt="Golden stained-glass window with the dove of the Holy Spirit at its center">
+<div class="cover-fade"></div>
+<div class="cover-text">
+<img class="cover-cross rise" src="assets/gold-cross.png" alt="">
+<p class="eyebrow rise d1">A TALK ON THE APOSTLE JOHN</p>
+<h1 class="rise d2">John,<br>the Beloved<br>Disciple</h1>
+<div class="cover-rule rise d3"></div>
+<p class="quote cover-lede rise d4">“We love because He first loved us.”</p>
+<p class="ref rise d5">1 JOHN 4:19</p>
 </div>
-
-<div class="notes" id="notes">
-  <h3>Speaker script</h3>
-  <p id="notesText"></p>
+<aside class="notes">Welcome everyone. Today we are going to talk about one man: John, the disciple whom Jesus loved. As we go, I want you to ask yourself one question: what would it look like for me to live as someone deeply loved by God?</aside>
+</section>
+<section id="who" class="light" data-transition="fade">
+<div class="split">
+<div class="split-main">
+<p class="eyebrow rise">INTRODUCTION</p>
+<h2 class="rise d1">Who was John?</h2>
+<div class="facts rise d2">
+<div class="fact"><p class="fact-k">FAMILY</p><p class="fact-v">Son of Zebedee and Salome, brother of James</p></div>
+<div class="fact"><p class="fact-k">TRADE</p><p class="fact-v">A Galilean fisherman, called from his nets (Mark 1:19–20)</p></div>
+<div class="fact"><p class="fact-k">NICKNAME</p><p class="fact-v">“Son of Thunder”, Boanerges (Mark 3:17)</p></div>
+<div class="fact"><p class="fact-k">INNER CIRCLE</p><p class="fact-v">With Peter and James at the Transfiguration and in Gethsemane</p></div>
+<div class="fact"><p class="fact-k">WRITINGS</p><p class="fact-v">A Gospel, three letters and the Book of Revelation</p></div>
 </div>
-
-<div class="bar">
-  <button id="prev">← Back</button>
-  <div class="dots" id="dots"></div>
-  <div style="display:flex; gap:8px;">
-    <button id="fs" title="Full screen (F)">⛶ Full screen</button>
-    <button id="toggleNotes">Script</button>
-    <button id="next">Next →</button>
-  </div>
 </div>
-
+<img class="portrait settle" src="assets/saint-john.jpg" alt="Painting of Saint John holding a chalice and a book, with an eagle at his feet">
+</div>
+<aside class="notes">John was a young fisherman from Galilee, working with his father Zebedee and his brother James. Jesus called them and they left their nets immediately. Jesus nicknamed the brothers “Sons of Thunder” because they were bold and fiery. John became one of the three closest friends of Jesus, together with Peter and James. Tradition credits him with the Gospel of John, three letters and the Book of Revelation. In art he is shown with an eagle, because his Gospel soars so high, and with a chalice, which we will talk about later.</aside>
+</section>
+<section id="beloved" class="dark" data-transition="fade">
+<img class="bleed settle" src="assets/last-supper.jpg" alt="Icon of the Last Supper, with John leaning against Jesus">
+<div class="shade-bottom"></div>
+<div class="bottom-stack">
+<p class="eyebrow rise">METAPHOR 1 · HEAD ON HIS CHEST</p>
+<h2 class="rise d1">Closeness is chosen by staying near.</h2>
+<p class="quote soft rise d2">“One of his disciples, whom Jesus loved, was reclining at table at Jesus’ side.”</p>
+<p class="ref rise d3">JOHN 13:23</p>
+</div>
+<aside class="notes">At the Last Supper, John is the one leaning on Jesus’ chest. Think about that picture: when you rest your head on someone’s chest, you can hear their heartbeat. John was close enough to hear the heart of God. Nobody gave him that place as a reward. He simply chose to stay near. The same seat is open to us: in prayer, in the Word, in worship, we can rest close enough to hear His heart.</aside>
+</section>
+<section id="named" class="light2" data-transition="fade">
+<p class="eyebrow rise">METAPHOR 2 · A NAME MADE OF LOVE</p>
+<h1 class="rise d1">In his own Gospel, John never writes his own name.</h1>
+<div class="two">
+<div class="rise d2">
+<p>Instead, he calls himself <b>“the disciple whom Jesus loved”</b>, five times.</p>
+<p class="refs">JOHN 13:23 · 19:26 · 20:2 · 21:7 · 21:20</p>
+</div>
+<div class="card-light rise d3">
+<p class="card-label">ASK YOURSELF</p>
+<h3>Do I define myself by what I do, or by the One who loves me?</h3>
+</div>
+</div>
+<aside class="notes">Here is something beautiful: John wrote an entire Gospel and never once wrote “John” to refer to himself. He could have said “John the apostle” or “John the fisherman” or “John who wrote this book.” Instead, he described himself by one thing: he was loved by Jesus. His identity was not his job, his talents or his mistakes. It was the love of Christ. So let me ask you: how do you describe yourself?</aside>
+</section>
+<section id="thunder" class="dark" data-transition="fade">
+<p class="eyebrow rise">METAPHOR 3 · THUNDER TURNED TO LOVE</p>
+<h2 class="rise d1">From “Son of Thunder” to “Apostle of Love”</h2>
+<div class="contrast">
+<div class="card-dark rise d2">
+<p class="card-label">THEN</p>
+<p class="quote">“Lord, do you want us to tell fire to come down from heaven and consume them?”</p>
+<p class="ref">LUKE 9:54</p>
+</div>
+<x-shape kind="arrow-right" class="arrow rise d3"></x-shape>
+<div class="card-glow rise d4">
+<p class="card-label">YEARS LATER</p>
+<p class="quote">“Beloved, let us love one another, for love is from God.”</p>
+<p class="ref">1 JOHN 4:7</p>
+</div>
+</div>
+<p class="soft closing-line rise d5">God’s love took the same fire and turned it toward people.</p>
+<aside class="notes">The young John was not exactly gentle. When a Samaritan village rejected Jesus, John and his brother wanted to call fire down from heaven on them. But look at the old John: his letters are full of one word, love. “Beloved, let us love one another.” God did not erase his passion; He redirected it. That is good news for us. Whatever your temperament, God’s love can transform it.</aside>
+</section>
+<section id="cross" class="light" data-transition="fade">
+<img class="side-img settle" src="assets/at-the-cross.jpg" alt="John standing beside Mary at the foot of the cross">
+<div class="right-col">
+<p class="eyebrow rise">METAPHOR 4 · THE ONE WHO STAYED</p>
+<h2 class="rise d1">When the others fled, the beloved disciple stayed at the cross.</h2>
+<p class="quote rise d2">“Woman, behold, your son!” … “Behold, your mother!”</p>
+<p class="ref rise d2">JOHN 19:26–27</p>
+<p class="soft lead rise d3">To the one who stays close, Jesus entrusts what is most precious to Him.</p>
+</div>
+<aside class="notes">At the cross, most of the disciples ran away in fear. But the Gospel tells us the disciple whom Jesus loved was standing there, next to Mary. And in His last moments, Jesus entrusted His own mother to John. Love that stays in the hard moments is love that can be trusted. When we stay close to Jesus in our pain, He trusts us with precious things.</aside>
+</section>
+<section id="mirror" class="wine" data-transition="fade">
+<img class="mirror-cross fade" src="assets/gold-cross.png" alt="">
+<div class="mirror-text">
+<p class="eyebrow rise">WHERE WE SEE OURSELVES</p>
+<h1 class="rise d1">John never claimed to be loved more than the others.</h1>
+<p class="soft lead rise d2">He simply lived as someone who was loved. That title is an invitation for every one of us: <b>you, too, are the disciple whom Jesus loves.</b></p>
+</div>
+<aside class="notes">Some people read “the disciple whom Jesus loved” and think John was the favorite. But Jesus loved all of His disciples. The difference is that John believed it and lived from it. That is where we see ourselves. You can put your own name there: I am the disciple whom Jesus loves. Not because I am better, but because He is good.</aside>
+</section>
+<section id="attempts" class="night2 withfoot" data-transition="fade">
+<p class="eyebrow rise">THE MAN THEY COULDN’T KILL</p>
+<h2 class="rise d1">They tried to kill him, more than once.</h2>
+<div class="attempt-row">
+<img class="medallion settle d2" src="assets/boiling-oil.jpg" alt="John praying inside a cauldron of boiling oil while Roman soldiers watch">
+<div class="attempt-cards">
+<div class="attempt rise d2">
+<p class="attempt-num">01 · ROME, UNDER EMPEROR DOMITIAN</p>
+<h3>The cauldron of boiling oil</h3>
+<p class="attempt-body">He was thrown into a cauldron of boiling oil and came out unharmed.</p>
+</div>
+<div class="attempt rise d3">
+<p class="attempt-num">02 · THE POISONED CUP</p>
+<h3>Poison that could not harm him</h3>
+<p class="attempt-body">He was given poison to drink. He blessed the cup, drank, and lived. That is why art shows him with a chalice.</p>
+</div>
+</div>
+</div>
+<p class="footnote">According to early church tradition: Tertullian (c. AD 200) records the boiling oil; the poisoned cup comes from later Christian legend.</p>
+<aside class="notes">Now let’s look at something remarkable. According to the early church writer Tertullian, around the year 200, John was taken to Rome under Emperor Domitian and thrown into a cauldron of boiling oil, and he came out without harm. Another ancient tradition says enemies tried to poison him. He blessed the cup, drank it, and nothing happened. That’s why paintings show John holding a chalice, sometimes with a small serpent coming out of it. These stories come from church tradition, not the Bible, but they tell us what the early Christians believed: God was protecting this man.</aside>
+</section>
+<section id="patmos" class="light" data-transition="fade">
+<p class="eyebrow rise">WHEN DEATH COULDN’T TAKE HIM</p>
+<h2 class="rise d1">So they sent him away, and God gave him a vision.</h2>
+<div class="steps">
+<div class="step rise d2">
+<p class="step-num">01</p>
+<p class="step-where">ROME</p>
+<h3>Boiling oil</h3>
+<p class="step-body">Thrown into the cauldron, and unharmed.</p>
+</div>
+<div class="step rise d3">
+<p class="step-num">02</p>
+<p class="step-where">PATMOS</p>
+<h3>Exile</h3>
+<p class="step-body">Banished to a rocky island “on account of the word of God” (Rev 1:9).</p>
+</div>
+<div class="step rise d4">
+<p class="step-num">03</p>
+<p class="step-where">PATMOS</p>
+<h3>Revelation</h3>
+<p class="step-body">In exile he receives the vision that closes the Bible.</p>
+</div>
+<div class="step rise d5">
+<p class="step-num">04</p>
+<p class="step-where">EPHESUS · c. AD 100</p>
+<h3>Rest</h3>
+<p class="step-body">Freed, he returns to Ephesus and dies in peace, an old man.</p>
+</div>
+</div>
+<aside class="notes">When they couldn’t kill him, they exiled him to Patmos, a small rocky island in the Aegean Sea. The Bible itself confirms this in Revelation 1:9. But what was meant to silence him became the place where God gave him the Book of Revelation. After the emperor died, John was freed, returned to Ephesus, and lived until around the year 100.</aside>
+</section>
+<section id="oldage" class="dark" data-transition="fade">
+<div class="age">
+<div class="age-left">
+<p class="big-one settle">1</p>
+<p class="soft rise d2">apostle who, by tradition, died of old age</p>
+</div>
+<div class="age-right">
+<p class="eyebrow rise">GOD KEPT HIM</p>
+<h2 class="rise d1">The only one who grew old</h2>
+<table class="fates rise d2">
+<tr><th style="width:34%">Apostle</th><th>What tradition says</th></tr>
+<tr><td>Peter</td><td>Crucified in Rome</td></tr>
+<tr><td>James</td><td>Killed by the sword (Acts 12:2)</td></tr>
+<tr><td>Andrew</td><td>Crucified in Greece</td></tr>
+<tr><td>Thomas</td><td>Martyred in India</td></tr>
+<tr class="row-john"><td>John</td><td>Died in peace, in old age, at Ephesus</td></tr>
+</table>
+<p class="age-quote rise d3">“If it is my will that he remain until I come, what is that to you?” (John 21:22)</p>
+</div>
+</div>
+<aside class="notes">Here is the most amazing part. According to tradition, almost all of the apostles died as martyrs: Peter was crucified, James was killed by the sword, which the Bible tells us in Acts 12, Andrew was crucified, Thomas was killed in India. But John, the one they tried to boil and to poison, died peacefully as an old man in Ephesus. Jesus Himself had said about John: “If it is my will that he remain until I come, what is that to you?” God kept him alive until his work was done.</aside>
+</section>
+<section id="reflection" class="light2" data-transition="fade">
+<p class="eyebrow rise">FINAL REFLECTION</p>
+<h1 class="rise d1">“Little children, love one another.”</h1>
+<p class="soft jerome rise d2">In his old age at Ephesus, this was the only sermon John still preached. Asked why, he answered: “It is the Lord’s command, and if this alone is done, it is enough.” (St. Jerome)</p>
+<div class="take">
+<div class="take-card rise d3">
+<h3>Stay close</h3>
+<p class="take-body">Rest near His heart, as at the Last Supper.</p>
+</div>
+<div class="take-card rise d4">
+<h3>Stay faithful</h3>
+<p class="take-body">Be found at the cross when others walk away.</p>
+</div>
+<div class="take-card rise d5">
+<h3>Stay loved</h3>
+<p class="take-body">Let His love define you more than your name.</p>
+</div>
+</div>
+<aside class="notes">Saint Jerome tells us that when John was very old, his disciples had to carry him into the church in Ephesus. He could no longer preach long sermons, so he would say only this: “Little children, love one another.” When they asked him why he always said the same thing, he answered: “Because it is the Lord’s command, and if this alone is done, it is enough.” So let’s take three things home: stay close, stay faithful, and stay loved.</aside>
+</section>
+<section id="closing" class="dark">
+<img class="bleed settle" src="assets/church.jpg" alt="Church interior with a golden altar at the end of the nave">
+<div class="shade-all"></div>
+<div class="center-stack">
+<img class="closing-cross rise" src="assets/gold-cross.png" alt="">
+<h1 class="closing-q rise d1">Are you resting close enough to hear His heartbeat?</h1>
+<p class="thanks rise d3">THANK YOU · GOD BLESS YOU</p>
+</div>
+<aside class="notes">I want to leave you with one question. John rested his head on Jesus’ chest. Are you resting close enough to hear His heartbeat? Take a moment this week to simply be with Him, and remember: you are the disciple whom Jesus loves. Thank you, and God bless you.</aside>
+</section>
+</div>
+<div class="nav" id="prev" aria-label="Previous slide"></div>
+<div class="nav" id="next" aria-label="Next slide"></div>
+<div id="bar"></div>
+<div id="hud"></div>
 <script>
-  const SCRIPTS = [
-    "Good morning, everyone. Today I want to talk about a man who was a fisherman, a son of thunder, a close friend of Jesus, a witness of the cross, and, according to tradition, the only one of the twelve apostles who died of old age. His name is John. We will follow his story from the lake to the island of Patmos.",
-    "John was from Galilee. He was not a poor man without options. He worked in his father Zebedee's business, with hired workers, and he was a partner with Simon Peter. One day Jesus walked by and called them while they were mending their nets. They left the boat and their father and followed him. Jesus later gave John and his brother James the nickname 'Sons of Thunder,' because they had fiery tempers. In Luke 9, they wanted to call fire down on a Samaritan village that refused to welcome Jesus. Jesus rebuked them. Over time, that same fiery temper became a deep love.",
-    "John was one of three who were closest to Jesus, with Peter and James. They were with Jesus when he raised Jairus's daughter, when he was transfigured on the mountain, and when he prayed in Gethsemane. At the Last Supper, John leaned back on Jesus' chest and asked who would betray him. In his Gospel, he calls himself 'the disciple whom Jesus loved.' He does not say this out of pride. He says it out of gratitude, because he never forgot how much he had been loved.",
-    "When Jesus was arrested, most of his disciples ran away, and Mark tells us that they all fled. John stayed near the cross, with Mary and the women. From the cross, Jesus looked at his mother and said to John, 'Behold your mother.' From that hour, John took her into his home. John later insists that he saw the blood and water flow from Jesus' side, and he says that his testimony is true. He was a witness, not a legend.",
-    "On the morning of the resurrection, Mary Magdalene reported that the tomb was empty. John and Peter ran to the tomb. John was faster and got there first, but he stopped at the entrance. Then Peter went in, and John followed. John looked inside the tomb, and the Gospel says, 'he saw and believed.' Later, by the lake, after the risen Jesus had appeared on the shore, John was the first to recognize him and said, 'It is the Lord!' Peter jumped into the water to reach Jesus. The fisherman's friend was the first to see clearly.",
-    "After Pentecost, John becomes a leader. In Acts 3, he and Peter healed a lame man at the Temple gate. They were arrested and warned to stop speaking about Jesus. Their answer was simple: 'We cannot stop speaking about what we have seen and heard.' Later, the church sent John and Peter to Samaria, where new believers received the Holy Spirit. Paul, writing in Galatians, lists John among the pillars of the church. The 'Son of Thunder' had become a pillar of the church.",
-    "John wrote his Gospel to make one thing clear: 'These are written that you may believe that Jesus is the Christ, the Son of God, and that by believing you may have life.' His Gospel has seven signs, which are miracles that point to who Jesus is, and seven 'I am' statements, like 'I am the way, the truth and the life.' He also wrote three letters about love, truth and hospitality. Many early Christians also connect him with Revelation, which was written to seven churches in Asia, including Ephesus. His famous line is 'God is love,' and in 1 John he also writes, 'Little children, let us love one another.'",
-    "Revelation 1 tells us where John was when he received the vision. 'I, John, your brother... was on the island called Patmos because of the word of God and the testimony of Jesus.' Patmos is a small, rocky island in the Aegean Sea. Rome used islands like this to isolate troublemakers. On the Lord's day, John heard a loud voice and saw the risen Christ standing among the lampstands. John fell down as though dead. Then Jesus put his right hand on him and said, 'Do not be afraid. I am the First and the Last, and the Living One.' Exile was not the end of the story.",
-    "Now, the stories about how his enemies tried to kill him. Scripture does not record them. The earliest account comes from Tertullian, around the year 200, who says that the emperor Domitian had John plunged into boiling oil in Rome, and that he came out unharmed. Jerome repeats the story about 200 years later. A later legend in the Acts of John adds a poisoned cup that John blessed and drank without harm. We should say clearly that these are tradition, not Scripture. Still, the pattern in those stories matches the book of Revelation: the Lord protects his witness until his work is complete.",
-    "After Patmos, John returned to Ephesus, a major city in what is now western Turkey. Irenaeus, a bishop writing around the year 180, says that John stayed in Ephesus until the time of the emperor Trajan. He died there around the year 100, very old. Tradition says he is the only one of the twelve apostles who died of natural causes. The others were killed, and his brother James was executed by King Herod in the year 44, as Acts 12 records. John's long life was a gift, and he used it to keep teaching people about love.",
-    "Here is the timeline. He was called around the year 28, witnessed the cross and resurrection in the early thirties, lived for decades in Ephesus, was exiled to Patmos around the year 95, and died around the year 100. Scripture gives us the start of the story. Tradition gives us the rest.",
-    "What can we learn? First, Jesus can change a heart. John started out wanting fire from heaven, and he ended writing 'love one another.' Second, faithfulness matters most when others run away. John stayed at the cross. Third, God's protection does not always mean an easy life. John was exiled, but Jesus was with him there. And finally, love is the mark of a disciple. Jesus said, 'By this everyone will know that you are my disciples, if you love one another.' Thank you. Now I'm happy to answer your questions."
-  ];
-
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  const dots = document.getElementById('dots');
-  const notes = document.getElementById('notes');
-  const notesText = document.getElementById('notesText');
-  let i = 0;
-
-  slides.forEach((_, k) => {
-    const b = document.createElement('button');
-    b.setAttribute('aria-label', 'Slide ' + (k + 1));
-    b.onclick = () => show(k);
-    dots.appendChild(b);
-  });
-
-  function show(n) {
-    i = Math.max(0, Math.min(slides.length - 1, n));
-    slides.forEach((s, k) => s.classList.toggle('active', k === i));
-    [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
-    document.getElementById('prev').disabled = i === 0;
-    document.getElementById('next').disabled = i === slides.length - 1;
-    notesText.textContent = SCRIPTS[i] || '';
-    try { localStorage.setItem('johnSlide', i); } catch (e) {}
-  }
-
-  document.getElementById('prev').onclick = () => show(i - 1);
-  document.getElementById('next').onclick = () => show(i + 1);
-  document.getElementById('toggleNotes').onclick = () => notes.classList.toggle('open');
-
-  const fsBtn = document.getElementById('fs');
-  function toggleFullscreen() {
-    try {
-      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-      else document.exitFullscreen();
-    } catch (e) {}
-  }
-  fsBtn.onclick = toggleFullscreen;
-  document.addEventListener('fullscreenchange', () => {
-    fsBtn.textContent = document.fullscreenElement ? '✕ Exit full screen' : '⛶ Full screen';
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(i + 1);
-    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(i - 1);
-    else if (e.key.toLowerCase() === 'n') notes.classList.toggle('open');
-    else if (e.key.toLowerCase() === 'f') toggleFullscreen();
-  });
-
-  let x0 = null;
-  document.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
-  document.addEventListener('touchend', e => {
-    if (x0 === null) return;
-    const dx = e.changedTouches[0].clientX - x0;
-    if (Math.abs(dx) > 50) show(dx < 0 ? i + 1 : i - 1);
-    x0 = null;
-  });
-
-  let start = 0;
-  try { start = parseInt(localStorage.getItem('johnSlide'), 10) || 0; } catch (e) {}
-  show(start);
+const slides=[...document.querySelectorAll('#stage > section')];
+const stage=document.getElementById('stage');
+let i=0;
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`scale(${s}) translate(-50%,-50%)`;}
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+ document.getElementById('hud').textContent=`${i+1} / ${slides.length}`;
+ document.getElementById('bar').style.width=`${(i+1)/slides.length*100}%`;
+ history.replaceState(null,'',`#${i+1}`);}
+addEventListener('resize',fit);
+addEventListener('keydown',e=>{
+ if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();show(i+1);}
+ else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(i-1);}
+ else if(e.key==='Home')show(0); else if(e.key==='End')show(slides.length-1);
+ else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+});
+document.getElementById('prev').onclick=()=>show(i-1);
+document.getElementById('next').onclick=()=>show(i+1);
+let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)show(i+(d<0?1:-1));tx=null;});
+fit();show((parseInt(location.hash.slice(1))||1)-1);
 </script>
 </body>
 </html>
