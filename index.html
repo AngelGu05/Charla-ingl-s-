@@ -6,73 +6,81 @@
 <title>John the Apostle: The Beloved Disciple</title>
 <style>
   :root {
-    --bg1: #1b1530; --bg2: #3a2a4f;
-    --fg: #fbf7ef; --muted: #cfc3d9;
-    --accent: #f2b35e; --panel: rgba(255,255,255,.07);
+    --bg1: #14213d; --bg2: #2d3f6b;
+    --fg: #fbf7ef; --muted: #c9d3e8;
+    --accent: #f2b35e; --accent2: #7fd1c7; --panel: rgba(255,255,255,.08);
   }
   * { box-sizing: border-box; }
   html, body { height: 100%; margin: 0; }
   body {
-    font-family: Georgia, "Times New Roman", serif;
-    color: var(--fg);
-    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    font-family: Georgia, "Times New Roman", serif; color: var(--fg);
+    background: radial-gradient(circle at 80% 10%, var(--bg2), var(--bg1) 70%);
     overflow: hidden;
   }
   .deck { position: fixed; inset: 0; }
   .slide {
-    position: absolute; inset: 0;
-    display: none; flex-direction: column; justify-content: center;
-    padding: 6vh 8vw 14vh;
-    animation: fade .4s ease;
+    position: absolute; inset: 0; display: none; align-items: center; justify-content: center;
+    padding: 5vh 7vw 15vh; animation: fade .45s ease;
   }
   .slide.active { display: flex; }
-  @keyframes fade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-  .kicker {
-    font-family: system-ui, sans-serif; font-size: clamp(.8rem, 1.6vw, 1rem);
-    text-transform: uppercase; letter-spacing: .18em; color: var(--accent); margin: 0 0 1vh;
-  }
-  h1 { font-size: clamp(2.4rem, 7vw, 5.4rem); line-height: 1.05; margin: 0 0 3vh; max-width: 18ch; }
-  h2 { font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.1; margin: 0 0 4vh; }
-  ul { font-size: clamp(1.25rem, 2.6vw, 2rem); line-height: 1.45; padding-left: 1.1em; margin: 0; }
-  li { margin: .5em 0; }
+  .wrap { width: min(1100px, 100%); display: grid; grid-template-columns: 1.1fr .9fr; gap: 4vw; align-items: center; }
+  .wrap.solo { grid-template-columns: 1fr; text-align: center; }
+  .art { width: 100%; max-height: 62vh; }
+  .art svg { width: 100%; height: auto; max-height: 62vh; display: block; }
+
+  .kicker { font-family: system-ui, sans-serif; font-size: clamp(.8rem, 1.5vw, 1rem); text-transform: uppercase; letter-spacing: .18em; color: var(--accent2); margin: 0 0 1.2vh; }
+  h1 { font-size: clamp(2.3rem, 6.4vw, 5rem); line-height: 1.05; margin: 0 0 2.5vh; }
+  h2 { font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1.1; margin: 0 0 3vh; color: var(--accent); }
+  ul { font-size: clamp(1.1rem, 2.2vw, 1.75rem); line-height: 1.45; padding-left: 1.1em; margin: 0; }
+  li { margin: .45em 0; }
   li::marker { color: var(--accent); }
-  .verse { color: var(--accent); font-style: italic; }
-  .big {
-    font-size: clamp(1.6rem, 4vw, 2.8rem); line-height: 1.35; font-style: italic;
-    border-left: 6px solid var(--accent); padding-left: .6em; margin: 0;
-  }
-  .sub { font-family: system-ui, sans-serif; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.25rem); margin-top: 4vh; }
+  .ref { color: var(--accent2); font-size: .85em; font-family: system-ui, sans-serif; white-space: nowrap; }
+  .quote { font-size: clamp(1.4rem, 3.4vw, 2.4rem); font-style: italic; line-height: 1.4; border-left: 6px solid var(--accent); padding-left: .6em; margin: 0; text-align: left; }
+  .quote small { display: block; font-family: system-ui, sans-serif; font-style: normal; font-size: .6em; color: var(--accent2); margin-top: .6em; }
+  .sub { font-family: system-ui, sans-serif; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.25rem); margin-top: 3vh; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 3vh; font-family: system-ui, sans-serif; }
+  .fact { background: var(--panel); border-radius: 12px; padding: 14px; text-align: center; }
+  .fact b { display: block; font-size: 1.5rem; color: var(--accent); font-family: Georgia, serif; }
+  .fact span { font-size: .9rem; color: var(--muted); }
+
+  .timeline { display: grid; gap: 14px; margin-top: 2vh; font-family: system-ui, sans-serif; width: 100%; }
+  .tl { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: baseline; background: var(--panel); padding: 14px 18px; border-radius: 12px; }
+  .tl b { color: var(--accent); font-family: Georgia, serif; font-size: 1.2rem; }
+  .tl span { font-size: clamp(1rem, 1.9vw, 1.2rem); }
 
   /* Controls */
   .bar {
-    position: fixed; left: 0; right: 0; bottom: 0; height: 12vh; min-height: 64px;
+    position: fixed; left: 0; right: 0; bottom: 0; height: 12vh; min-height: 66px;
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding: 0 4vw; background: rgba(0,0,0,.2); backdrop-filter: blur(6px);
+    padding: 0 4vw; background: rgba(10,15,30,.45); backdrop-filter: blur(6px);
     font-family: system-ui, sans-serif;
   }
-  .bar button {
-    background: var(--panel); color: var(--fg); border: 1px solid rgba(255,255,255,.2);
-    border-radius: 10px; padding: 10px 16px; font-size: 1rem; cursor: pointer;
-  }
+  .bar button { background: var(--panel); color: var(--fg); border: 1px solid rgba(255,255,255,.22); border-radius: 10px; padding: 10px 16px; font-size: 1rem; cursor: pointer; }
   .bar button:disabled { opacity: .3; cursor: default; }
   .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .dots button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 0; background: rgba(255,255,255,.3); cursor: pointer; }
   .dots button.on { background: var(--accent); }
 
-  /* Speaker script */
   .notes {
     position: fixed; right: 0; top: 0; bottom: 12vh; width: min(420px, 90vw);
-    background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
-    padding: 24px; overflow-y: auto; transform: translateX(105%); transition: transform .3s;
+    background: rgba(5,8,18,.8); backdrop-filter: blur(8px); padding: 24px; overflow-y: auto;
+    transform: translateX(105%); transition: transform .3s;
     font-family: system-ui, sans-serif; font-size: 1.05rem; line-height: 1.6;
   }
   .notes.open { transform: none; }
   .notes h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin: 0 0 12px; }
   .notes p { margin: 0; }
 
-  @media (max-width: 600px) {
-    .slide { padding: 8vh 6vw 16vh; }
+  @media (max-width: 760px) {
+    .wrap { grid-template-columns: 1fr; gap: 2vh; }
+    .art { max-height: 28vh; order: -1; }
+    .art svg { max-height: 28vh; }
+    .slide { padding: 4vh 6vw 16vh; align-items: flex-start; overflow-y: auto; }
+    .facts { grid-template-columns: 1fr; }
+    .tl { grid-template-columns: 1fr; gap: 4px; }
     .bar button { padding: 10px 12px; }
   }
 </style>
@@ -80,90 +88,246 @@
 <body>
 <div class="deck" id="deck">
 
+  <!-- 1. Title -->
   <section class="slide">
-    <p class="kicker">A 5-minute talk</p>
-    <h1>John the Apostle: The Beloved Disciple</h1>
-    <p class="sub">Good morning, everyone.</p>
-    <!-- script: Good morning, everyone. Today I want to talk about a man who was a fisherman, a "son of thunder," a close friend of Jesus, and, according to tradition, the only one of the twelve apostles who died of old age. His name is John. -->
-    <script type="text/plain" class="script">Good morning, everyone. Today I want to talk about a man who was a fisherman, a "son of thunder," a close friend of Jesus, and, according to tradition, the only one of the twelve apostles who died of old age. His name is John.</script>
+    <div class="wrap">
+      <div>
+        <p class="kicker">A 5-minute talk</p>
+        <h1>John the Apostle: The Beloved Disciple</h1>
+        <p class="sub">Fisherman · Friend of Jesus · Apostle of love</p>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3f6b"/><stop offset="1" stop-color="#14213d"/></linearGradient></defs>
+          <rect width="400" height="300" rx="20" fill="url(#sea)"/>
+          <circle cx="300" cy="90" r="42" fill="#f2b35e" opacity=".9"/>
+          <path d="M0 200 Q50 185 100 200 T200 200 T300 200 T400 200 V300 H0Z" fill="#2f5d8a" opacity=".8"/>
+          <path d="M0 230 Q50 215 100 230 T200 230 T300 230 T400 230 V300 H0Z" fill="#26507a"/>
+          <path d="M120 170 H250 L230 195 H140Z" fill="#7a4a1e"/>
+          <path d="M185 170 V100 L240 165Z" fill="#fbf7ef"/>
+          <path d="M180 170 V120 L140 165Z" fill="#fbf7ef" opacity=".85"/>
+          <path d="M120 170 Q185 185 250 170" stroke="#f2b35e" stroke-width="3" fill="none"/>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- 2. Who was John -->
   <section class="slide">
-    <h2>Who was John?</h2>
-    <ul>
-      <li>Galilean fisherman, son of Zebedee, brother of James</li>
-      <li>Called by Jesus while mending nets (<span class="verse">Mark 1:19-20</span>)</li>
-      <li>Nicknamed "Sons of Thunder" (<span class="verse">Mark 3:17</span>)</li>
-    </ul>
-    <script type="text/plain" class="script">John was from Galilee. He worked with his father Zebedee and his brother James on the Sea of Galilee. One day Jesus called them while they were mending their nets, and they left everything to follow him. Jesus gave John and James the nickname "Sons of Thunder." They had fiery tempers. In Luke 9, they even asked Jesus to call down fire from heaven on a Samaritan village that refused to welcome him. But Jesus was patient, and over time he changed them.</script>
+    <div class="wrap">
+      <div>
+        <h2>Who was John?</h2>
+        <ul>
+          <li>Galilean fisherman on the Sea of Galilee</li>
+          <li>Son of Zebedee, brother of James</li>
+          <li>Called by Jesus while mending nets <span class="ref">Mark 1:19-20</span></li>
+          <li>Nicknamed "Sons of Thunder" <span class="ref">Mark 3:17</span></li>
+        </ul>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <rect width="400" height="300" rx="20" fill="#1f3358"/>
+          <!-- net -->
+          <g stroke="#7fd1c7" stroke-width="2" fill="none" opacity=".9">
+            <path d="M60 60 L200 40 L330 70 L300 200 L160 240 L70 170 Z"/>
+            <path d="M60 60 L300 200 M200 40 L160 240 M330 70 L70 170 M130 52 L110 200 M265 55 L240 230"/>
+            <path d="M130 140 L270 130 M100 110 L300 120 M150 200 L280 175"/>
+          </g>
+          <!-- fish -->
+          <ellipse cx="230" cy="180" rx="34" ry="18" fill="#f2b35e"/>
+          <path d="M262 180 L290 165 L290 195Z" fill="#f2b35e"/>
+          <circle cx="218" cy="176" r="3" fill="#14213d"/>
+          <!-- oar -->
+          <rect x="40" y="250" width="320" height="10" rx="5" fill="#7a4a1e"/>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- 3. Inner circle -->
   <section class="slide">
-    <h2>The Inner Circle</h2>
-    <ul>
-      <li>Part of the inner three: Peter, James and John</li>
-      <li>Present at the Transfiguration and in Gethsemane</li>
-      <li>"The disciple whom Jesus loved" (<span class="verse">John 13:23</span>)</li>
-    </ul>
-    <script type="text/plain" class="script">John was part of Jesus' inner circle, together with Peter and James. He was present at the Transfiguration, when Jesus' face shone like the sun, and he was with Jesus in the garden of Gethsemane. At the Last Supper, John leaned on Jesus' chest. In his Gospel, he calls himself "the disciple whom Jesus loved." He does not say this out of pride. He says it out of gratitude, because he never forgot how much he had been loved.</script>
+    <div class="wrap">
+      <div>
+        <h2>The Inner Circle</h2>
+        <ul>
+          <li>Part of the inner three: Peter, James and John</li>
+          <li>Present at the Transfiguration <span class="ref">Matthew 17:1-2</span></li>
+          <li>Present in the garden of Gethsemane <span class="ref">Mark 14:33</span></li>
+          <li>"The disciple whom Jesus loved" <span class="ref">John 13:23</span></li>
+        </ul>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <rect width="400" height="300" rx="20" fill="#1f3358"/>
+          <circle cx="200" cy="80" r="26" fill="#f2b35e"/>
+          <circle cx="200" cy="66" r="0" fill="none"/>
+          <path d="M170 150 Q200 110 230 150 V220 H170Z" fill="#f2b35e"/>
+          <circle cx="110" cy="110" r="22" fill="#7fd1c7"/>
+          <path d="M84 170 Q110 136 136 170 V230 H84Z" fill="#7fd1c7"/>
+          <circle cx="290" cy="110" r="22" fill="#fbf7ef"/>
+          <path d="M264 170 Q290 136 316 170 V230 H264Z" fill="#fbf7ef"/>
+          <!-- light (transfiguration glow) -->
+          <circle cx="200" cy="80" r="60" fill="none" stroke="#f2b35e" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 6"/>
+          <text x="200" y="265" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="16">Peter · John · James</text>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- 4. At the cross -->
   <section class="slide">
-    <h2>Faithful at the Cross</h2>
-    <ul>
-      <li>Almost all the disciples fled</li>
-      <li>John stayed at the foot of the cross (<span class="verse">John 19:25-27</span>)</li>
-      <li>Jesus entrusted his mother Mary to John's care</li>
-      <li>At the empty tomb: "he saw and believed" (<span class="verse">John 20:8</span>)</li>
-    </ul>
-    <script type="text/plain" class="script">When Jesus was crucified, almost all of his disciples ran away. John stayed. From the cross, Jesus looked at his mother Mary and said to John, "Behold your mother." From that hour, John took her into his home. On the morning of the resurrection, John ran to the empty tomb with Peter. He arrived first, looked inside, and believed.</script>
+    <div class="wrap">
+      <div>
+        <h2>Faithful at the Cross</h2>
+        <ul>
+          <li>Almost all the disciples fled</li>
+          <li>John stayed at the foot of the cross <span class="ref">John 19:25-27</span></li>
+          <li>Jesus entrusted his mother Mary to John's care</li>
+          <li>At the empty tomb: "he saw and believed" <span class="ref">John 20:8</span></li>
+        </ul>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3f6b"/><stop offset="1" stop-color="#f2b35e" stop-opacity=".5"/></linearGradient></defs>
+          <rect width="400" height="300" rx="20" fill="url(#sky)"/>
+          <path d="M0 260 Q200 210 400 260 V300 H0Z" fill="#14213d"/>
+          <rect x="190" y="70" width="20" height="170" fill="#fbf7ef"/>
+          <rect x="140" y="110" width="120" height="18" fill="#fbf7ef"/>
+          <circle cx="200" cy="66" r="0" fill="none"/>
+          <path d="M120 245 Q200 225 280 245" stroke="#7fd1c7" stroke-width="4" fill="none" opacity=".7"/>
+          <text x="200" y="280" text-anchor="middle" fill="#fbf7ef" font-family="system-ui" font-size="15">"Behold your mother."</text>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- 5. Timeline -->
   <section class="slide">
-    <h2>Why John Matters</h2>
-    <ul>
-      <li>Wrote the Gospel of John, 1, 2 and 3 John, and (traditionally) Revelation</li>
-      <li class="verse">"In the beginning was the Word" (John 1:1)</li>
-      <li class="verse">"For God so loved the world" (John 3:16)</li>
-      <li class="verse">"God is love" (1 John 4:8)</li>
-    </ul>
-    <script type="text/plain" class="script">John wrote the Gospel that bears his name, three letters, and, according to most of the early church, the book of Revelation. His Gospel is different from the other three. It has deep, reflective language. It begins with "In the beginning was the Word," and it contains some of the most famous verses in the Bible, like "For God so loved the world." Because of his focus on love, he is often called the apostle of love. He wrote, "God is love," and "Little children, let us love one another."</script>
+    <div class="wrap solo">
+      <div>
+        <h2>John's Life at a Glance</h2>
+        <div class="timeline">
+          <div class="tl"><b>c. AD 28</b><span>Called by Jesus on the Sea of Galilee</span></div>
+          <div class="tl"><b>AD 30-33</b><span>Witness of the cross, resurrection and Pentecost</span></div>
+          <div class="tl"><b>c. AD 60-90</b><span>Ministry in Ephesus; writes his Gospel and letters</span></div>
+          <div class="tl"><b>c. AD 95</b><span>Exiled to Patmos, where he receives the visions of Revelation</span></div>
+          <div class="tl"><b>c. AD 100</b><span>Dies in Ephesus, very old, the last of the twelve</span></div>
+        </div>
+        <p class="sub">Dates are approximate, based on Scripture and early church tradition.</p>
+      </div>
+    </div>
   </section>
 
+  <!-- 6. Why he matters -->
   <section class="slide">
-    <h2>Escaping Death</h2>
-    <ul>
-      <li>Tradition (Tertullian, around AD 200): boiled in oil in Rome, and came out unharmed</li>
-      <li>Exiled to the island of Patmos (<span class="verse">Revelation 1:9</span>)</li>
-      <li>God protected him until his work was finished</li>
-    </ul>
-    <script type="text/plain" class="script">Now, let's talk about the time his enemies tried to kill him. Scripture does not describe this event, but an early church writer named Tertullian, around the year 200, reports that the Roman emperor Domitian had John thrown into a large pot of boiling oil in Rome. Tradition says John came out without a single burn. The emperor then sent him into exile on the island of Patmos. John himself writes that he was on Patmos "because of the word of God and the testimony of Jesus" (Revelation 1:9). There, he received the visions that became the book of Revelation. A later legend, from a non-biblical text called the Acts of John, also tells of a poisoned cup that John blessed and drank without harm. We do not need the legends to see the principle: God protected his witness until his work was complete.</script>
+    <div class="wrap">
+      <div>
+        <h2>Why John Matters</h2>
+        <ul>
+          <li>Wrote the Gospel of John, 1, 2 and 3 John, and (traditionally) Revelation</li>
+          <li>His Gospel's purpose: "that you may believe" <span class="ref">John 20:31</span></li>
+          <li>Focused on love, life and light</li>
+          <li>Often called the "apostle of love"</li>
+        </ul>
+      </div>
+      <div>
+        <p class="quote">"In the beginning was the Word."<small>John 1:1</small></p>
+        <p class="quote" style="margin-top:4vh">"God is love."<small>1 John 4:8</small></p>
+      </div>
+    </div>
   </section>
 
+  <!-- 7. Escaping death -->
   <section class="slide">
-    <h2>A Long Life and a Peaceful Death</h2>
-    <ul>
-      <li>Returned to Ephesus and led the churches of Asia Minor</li>
-      <li>Died there around AD 100, very old</li>
-      <li>The other apostles were killed for their faith (James: <span class="verse">Acts 12:2</span>)</li>
-    </ul>
-    <script type="text/plain" class="script">After his exile, John returned to Ephesus, in modern-day Turkey, and cared for the churches in that region. He died there around the year 100, very old. Tradition says he is the only one of the twelve apostles who died of natural causes. The others, according to Scripture and tradition, were killed for their faith. His brother James was executed by King Herod around the year 44. Peter and others were martyred as well. John's long life was a gift, and he used it to keep telling people about love.</script>
+    <div class="wrap">
+      <div>
+        <h2>Escaping Death</h2>
+        <ul>
+          <li>Tradition (Tertullian, c. AD 200): thrown into boiling oil in Rome, and came out unharmed</li>
+          <li>Exiled to the island of Patmos <span class="ref">Revelation 1:9</span></li>
+          <li>A later legend (<em>Acts of John</em>): a poisoned cup he drank without harm</li>
+          <li>God protected his witness until his work was finished</li>
+        </ul>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <rect width="400" height="300" rx="20" fill="#1f3358"/>
+          <!-- cauldron -->
+          <path d="M110 150 H290 Q290 230 200 240 Q110 230 110 150Z" fill="#3b3b4f"/>
+          <ellipse cx="200" cy="150" rx="90" ry="14" fill="#7a4a1e"/>
+          <path d="M150 140 Q170 125 190 140 T230 140 T270 140" stroke="#f2b35e" stroke-width="5" fill="none"/>
+          <path d="M165 110 Q170 95 165 80 M200 105 Q205 90 200 75 M235 110 Q240 95 235 80" stroke="#f2b35e" stroke-width="3" fill="none" opacity=".7"/>
+          <!-- island -->
+          <path d="M40 270 Q120 250 200 262 T360 268 V300 H40Z" fill="#26507a"/>
+          <path d="M150 262 Q200 240 250 262" fill="#7a4a1e"/>
+          <text x="200" y="292" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="13">Patmos</text>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- 8. Long life -->
   <section class="slide">
-    <h2>What Can We Learn?</h2>
-    <ul>
-      <li>Jesus can change a heart: from "fire from heaven" to "love one another"</li>
-      <li>God protects his people until his purpose is complete</li>
-      <li>Faithfulness matters, especially when others run away</li>
-    </ul>
-    <script type="text/plain" class="script">John started out as a young man who wanted fire to fall on his enemies. He ended as an old man who wrote, "Little children, let us love one another." Jesus can change a heart like that, and he can change ours too. John stayed at the cross when others ran. He trusted God through exile and danger. Even if our lives are not as dramatic, we can be faithful where we are, and we can trust that God is still protecting his work. Thank you. Now I'm happy to answer your questions.</script>
+    <div class="wrap">
+      <div>
+        <h2>A Long Life and a Peaceful Death</h2>
+        <ul>
+          <li>Returned to Ephesus, in modern-day Turkey</li>
+          <li>Led and cared for the churches of Asia Minor</li>
+          <li>Died there around AD 100, very old</li>
+          <li>Tradition: the only apostle who died of natural causes</li>
+          <li>His brother James was executed by Herod <span class="ref">Acts 12:2</span></li>
+        </ul>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <rect width="400" height="300" rx="20" fill="#1f3358"/>
+          <!-- columns -->
+          <g fill="#fbf7ef" opacity=".9">
+            <rect x="60" y="110" width="22" height="130"/>
+            <rect x="110" y="110" width="22" height="130"/>
+            <rect x="260" y="110" width="22" height="130"/>
+            <rect x="310" y="110" width="22" height="130"/>
+          </g>
+          <path d="M45 105 H330 L300 80 H75Z" fill="#fbf7ef"/>
+          <path d="M40 245 H340 V258 H40Z" fill="#7a4a1e"/>
+          <text x="200" y="70" text-anchor="middle" fill="#f2b35e" font-family="system-ui" font-size="18">Ephesus</text>
+          <circle cx="200" cy="180" r="0" fill="none"/>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- 9. Lessons -->
   <section class="slide">
-    <p class="kicker">Thank you</p>
-    <p class="big">"Little children, let us love one another."</p>
-    <p class="sub">1 John 3:18 · Questions?</p>
+    <div class="wrap">
+      <div>
+        <h2>What Can We Learn?</h2>
+        <ul>
+          <li>Jesus can change a heart: from "fire from heaven" to "love one another"</li>
+          <li>Faithfulness matters, especially when others run away</li>
+          <li>God protects his people until his purpose is complete</li>
+        </ul>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 400 300">
+          <rect width="400" height="300" rx="20" fill="#1f3358"/>
+          <path d="M200 240 C120 180 90 130 120 100 C145 75 185 90 200 120 C215 90 255 75 280 100 C310 130 280 180 200 240Z" fill="#f2b35e"/>
+          <path d="M200 120 C185 90 145 75 120 100" stroke="#7a4a1e" stroke-width="3" fill="none" opacity=".5"/>
+          <text x="200" y="278" text-anchor="middle" fill="#c9d3e8" font-family="system-ui" font-size="15">"God is love" · 1 John 4:8</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Closing -->
+  <section class="slide">
+    <div class="wrap solo">
+      <div>
+        <p class="kicker">Thank you</p>
+        <p class="quote" style="text-align:center; border:0; padding:0; margin:0 auto; max-width:24ch;">"Little children, let us love one another."<small>1 John 3:18 · Questions?</small></p>
+      </div>
+    </div>
   </section>
 
 </div>
@@ -183,6 +347,19 @@
 </div>
 
 <script>
+  const SCRIPTS = [
+    "Good morning, everyone. Today I want to talk about a man who was a fisherman, a 'son of thunder,' a close friend of Jesus, and, according to tradition, the only one of the twelve apostles who died of old age. His name is John.",
+    "John was from Galilee. He worked with his father Zebedee and his brother James on the Sea of Galilee. One day Jesus called them while they were mending their nets, and they left everything to follow him. Jesus gave John and James the nickname 'Sons of Thunder.' They had fiery tempers. In Luke 9, they even asked Jesus to call down fire from heaven on a Samaritan village that refused to welcome him. But Jesus was patient, and over time he changed them.",
+    "John was part of Jesus' inner circle, together with Peter and James. He was present at the Transfiguration, when Jesus' face shone like the sun, and he was with Jesus in the garden of Gethsemane. At the Last Supper, John leaned on Jesus' chest. In his Gospel, he calls himself 'the disciple whom Jesus loved.' He does not say this out of pride. He says it out of gratitude, because he never forgot how much he had been loved.",
+    "When Jesus was crucified, almost all of his disciples ran away. John stayed. From the cross, Jesus looked at his mother Mary and said to John, 'Behold your mother.' From that hour, John took her into his home. On the morning of the resurrection, John ran to the empty tomb with Peter. He arrived first, looked inside, and believed.",
+    "Here is the big picture. Scripture gives us the start of John's story: his call around the year 28, and his witness at the cross and resurrection in the early 30s. The rest comes mainly from early church tradition. He lived for decades in Ephesus, wrote his Gospel and letters there, was exiled to Patmos around the year 95, and died in Ephesus around the year 100.",
+    "John wrote the Gospel that bears his name, three letters, and, according to most of the early church, the book of Revelation. His Gospel states its purpose clearly: 'that you may believe that Jesus is the Christ, the Son of God, and that by believing you may have life' (John 20:31). It begins with 'In the beginning was the Word,' and it contains some of the most famous verses in the Bible, like 'For God so loved the world.' He wrote, 'God is love,' and 'Little children, let us love one another.'",
+    "Now, let's talk about the time his enemies tried to kill him. Scripture does not describe this event, but an early church writer named Tertullian, around the year 200, reports that the Roman emperor Domitian had John thrown into a large pot of boiling oil in Rome. Tradition says John came out without a single burn. The emperor then sent him into exile on the island of Patmos. John himself writes that he was on Patmos 'because of the word of God and the testimony of Jesus' (Revelation 1:9). A later legend, from a non-biblical text called the Acts of John, also tells of a poisoned cup that John blessed and drank without harm. We do not need the legends to see the principle: God protected his witness until his work was complete.",
+    "After his exile, John returned to Ephesus, in modern-day Turkey, and cared for the churches in that region. He died there around the year 100, very old. Tradition says he is the only one of the twelve apostles who died of natural causes. The others, according to Scripture and tradition, were killed for their faith. His brother James was executed by King Herod around the year 44. John's long life was a gift, and he used it to keep telling people about love.",
+    "John started out as a young man who wanted fire to fall on his enemies. He ended as an old man who wrote, 'Little children, let us love one another.' Jesus can change a heart like that, and he can change ours too. John stayed at the cross when others ran. He trusted God through exile and danger. Even if our lives are not as dramatic, we can be faithful where we are, and we can trust that God is still protecting his work.",
+    "Thank you. Now I'm happy to answer your questions."
+  ];
+
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = document.getElementById('dots');
   const notes = document.getElementById('notes');
@@ -202,8 +379,7 @@
     [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
     document.getElementById('prev').disabled = i === 0;
     document.getElementById('next').disabled = i === slides.length - 1;
-    const script = slides[i].querySelector('.script');
-    notesText.textContent = script ? script.textContent : '';
+    notesText.textContent = SCRIPTS[i] || '';
     try { localStorage.setItem('johnSlide', i); } catch (e) {}
   }
 
@@ -217,7 +393,6 @@
     else if (e.key.toLowerCase() === 'n') notes.classList.toggle('open');
   });
 
-  // Swipe support on phones
   let x0 = null;
   document.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
   document.addEventListener('touchend', e => {
